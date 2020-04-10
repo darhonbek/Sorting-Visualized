@@ -3,24 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		207465DD24400E6000D54085 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207465DC24400E6000D54085 /* BarView.swift */; };
 		20CE6022243EEA2300CE90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6021243EEA2300CE90F1 /* AppDelegate.swift */; };
 		20CE6024243EEA2300CE90F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */; };
-		20CE6026243EEA2300CE90F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6025243EEA2300CE90F1 /* ViewController.swift */; };
-		20CE6029243EEA2300CE90F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20CE6027243EEA2300CE90F1 /* Main.storyboard */; };
+		20CE6026243EEA2300CE90F1 /* SortingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6025243EEA2300CE90F1 /* SortingViewController.swift */; };
 		20CE602B243EEA2400CE90F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20CE602A243EEA2400CE90F1 /* Assets.xcassets */; };
 		20CE602E243EEA2400CE90F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20CE602C243EEA2400CE90F1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		207465DC24400E6000D54085 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		20CE601E243EEA2300CE90F1 /* Sorting Visualized.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sorting Visualized.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20CE6021243EEA2300CE90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		20CE6025243EEA2300CE90F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		20CE6028243EEA2300CE90F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		20CE6025243EEA2300CE90F1 /* SortingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingViewController.swift; sourceTree = "<group>"; };
 		20CE602A243EEA2400CE90F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20CE602D243EEA2400CE90F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20CE602F243EEA2400CE90F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		207465DE24400E6400D54085 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				207465DC24400E6000D54085 /* BarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		20CE6015243EEA2300CE90F1 = {
 			isa = PBXGroup;
 			children = (
@@ -58,13 +66,29 @@
 			children = (
 				20CE6021243EEA2300CE90F1 /* AppDelegate.swift */,
 				20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */,
-				20CE6025243EEA2300CE90F1 /* ViewController.swift */,
-				20CE6027243EEA2300CE90F1 /* Main.storyboard */,
-				20CE602A243EEA2400CE90F1 /* Assets.xcassets */,
-				20CE602C243EEA2400CE90F1 /* LaunchScreen.storyboard */,
+				20CE6036243EEA7C00CE90F1 /* ViewControllers */,
+				207465DE24400E6400D54085 /* Views */,
+				20CE6035243EEA6C00CE90F1 /* Assets */,
 				20CE602F243EEA2400CE90F1 /* Info.plist */,
 			);
 			path = "Sorting Visualized";
+			sourceTree = "<group>";
+		};
+		20CE6035243EEA6C00CE90F1 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				20CE602A243EEA2400CE90F1 /* Assets.xcassets */,
+				20CE602C243EEA2400CE90F1 /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		20CE6036243EEA7C00CE90F1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				20CE6025243EEA2300CE90F1 /* SortingViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,7 +127,7 @@
 				};
 			};
 			buildConfigurationList = 20CE6019243EEA2300CE90F1 /* Build configuration list for PBXProject "Sorting Visualized" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,7 +151,6 @@
 			files = (
 				20CE602E243EEA2400CE90F1 /* LaunchScreen.storyboard in Resources */,
 				20CE602B243EEA2400CE90F1 /* Assets.xcassets in Resources */,
-				20CE6029243EEA2300CE90F1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +161,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20CE6026243EEA2300CE90F1 /* ViewController.swift in Sources */,
+				207465DD24400E6000D54085 /* BarView.swift in Sources */,
+				20CE6026243EEA2300CE90F1 /* SortingViewController.swift in Sources */,
 				20CE6022243EEA2300CE90F1 /* AppDelegate.swift in Sources */,
 				20CE6024243EEA2300CE90F1 /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +171,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		20CE6027243EEA2300CE90F1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				20CE6028243EEA2300CE90F1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		20CE602C243EEA2400CE90F1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -216,7 +232,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +286,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,6 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TALWF53E28;
 				INFOPLIST_FILE = "Sorting Visualized/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TALWF53E28;
 				INFOPLIST_FILE = "Sorting Visualized/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SortingViewController.swift
 //  Sorting Visualized
 //
 //  Created by Darkhonbek Mamataliev on 9/4/20.
@@ -8,13 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
+class SortingViewController: UIViewController {
 
 }
 

@@ -40,7 +40,7 @@ class MergeSortVisualizer: MergeSortVisualizerProtocol {
         var rIndex = 0
         var array: [T] = []
 
-        while lIndex < lhs.count && rIndex < rhs.count {
+        while lIndex < lhs.count && rIndex < rhs.count
             if lhs[lIndex] < rhs[rIndex] {
                 array.append(lhs[lIndex])
                 lIndex += 1

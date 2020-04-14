@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2017375524458080006F1C54 /* BubbleSortVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2017375424458080006F1C54 /* BubbleSortVisualizer.swift */; };
+		2017375724458D1E006F1C54 /* SortingAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2017375624458D1E006F1C54 /* SortingAction.swift */; };
+		2029EEC924458E9A00F4F91D /* SortingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029EEC824458E9A00F4F91D /* SortingViewModel.swift */; };
+		2029EECB24458F7600F4F91D /* SortingAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029EECA24458F7600F4F91D /* SortingAlgorithm.swift */; };
+		2029EECE2445908700F4F91D /* SortingVisualizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2029EECD2445908700F4F91D /* SortingVisualizing.swift */; };
 		207465DD24400E6000D54085 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207465DC24400E6000D54085 /* BarView.swift */; };
-		20B1F9B92441D39B0061EC19 /* SortingVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1F9B82441D39B0061EC19 /* SortingVisualizer.swift */; };
+		20B1F9B92441D39B0061EC19 /* MergeSortVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B1F9B82441D39B0061EC19 /* MergeSortVisualizer.swift */; };
 		20CE6022243EEA2300CE90F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6021243EEA2300CE90F1 /* AppDelegate.swift */; };
 		20CE6024243EEA2300CE90F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */; };
 		20CE6026243EEA2300CE90F1 /* SortingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CE6025243EEA2300CE90F1 /* SortingViewController.swift */; };
@@ -17,8 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2017375424458080006F1C54 /* BubbleSortVisualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSortVisualizer.swift; sourceTree = "<group>"; };
+		2017375624458D1E006F1C54 /* SortingAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingAction.swift; sourceTree = "<group>"; };
+		2029EEC824458E9A00F4F91D /* SortingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingViewModel.swift; sourceTree = "<group>"; };
+		2029EECA24458F7600F4F91D /* SortingAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingAlgorithm.swift; sourceTree = "<group>"; };
+		2029EECD2445908700F4F91D /* SortingVisualizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingVisualizing.swift; sourceTree = "<group>"; };
 		207465DC24400E6000D54085 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
-		20B1F9B82441D39B0061EC19 /* SortingVisualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingVisualizer.swift; sourceTree = "<group>"; };
+		20B1F9B82441D39B0061EC19 /* MergeSortVisualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeSortVisualizer.swift; sourceTree = "<group>"; };
 		20CE601E243EEA2300CE90F1 /* Sorting Visualized.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sorting Visualized.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20CE6021243EEA2300CE90F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2029EECC24458F8400F4F91D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2029EEC824458E9A00F4F91D /* SortingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		207465DE24400E6400D54085 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -47,12 +65,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		20B1F9B72441D38A0061EC19 /* Model */ = {
+		20B1F9B72441D38A0061EC19 /* Model_TO_BE_RENAMED */ = {
 			isa = PBXGroup;
 			children = (
-				20B1F9B82441D39B0061EC19 /* SortingVisualizer.swift */,
+				2017375624458D1E006F1C54 /* SortingAction.swift */,
+				2029EECA24458F7600F4F91D /* SortingAlgorithm.swift */,
+				2029EECD2445908700F4F91D /* SortingVisualizing.swift */,
+				2017375424458080006F1C54 /* BubbleSortVisualizer.swift */,
+				20B1F9B82441D39B0061EC19 /* MergeSortVisualizer.swift */,
 			);
-			path = Model;
+			path = Model_TO_BE_RENAMED;
 			sourceTree = "<group>";
 		};
 		20CE6015243EEA2300CE90F1 = {
@@ -76,7 +98,8 @@
 			children = (
 				20CE6021243EEA2300CE90F1 /* AppDelegate.swift */,
 				20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */,
-				20B1F9B72441D38A0061EC19 /* Model */,
+				20B1F9B72441D38A0061EC19 /* Model_TO_BE_RENAMED */,
+				2029EECC24458F8400F4F91D /* ViewModels */,
 				20CE6036243EEA7C00CE90F1 /* ViewControllers */,
 				207465DE24400E6400D54085 /* Views */,
 				20CE6035243EEA6C00CE90F1 /* Assets */,
@@ -173,10 +196,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				207465DD24400E6000D54085 /* BarView.swift in Sources */,
+				2017375524458080006F1C54 /* BubbleSortVisualizer.swift in Sources */,
+				2029EECB24458F7600F4F91D /* SortingAlgorithm.swift in Sources */,
 				20CE6026243EEA2300CE90F1 /* SortingViewController.swift in Sources */,
+				2029EEC924458E9A00F4F91D /* SortingViewModel.swift in Sources */,
 				20CE6022243EEA2300CE90F1 /* AppDelegate.swift in Sources */,
+				2029EECE2445908700F4F91D /* SortingVisualizing.swift in Sources */,
 				20CE6024243EEA2300CE90F1 /* SceneDelegate.swift in Sources */,
-				20B1F9B92441D39B0061EC19 /* SortingVisualizer.swift in Sources */,
+				20B1F9B92441D39B0061EC19 /* MergeSortVisualizer.swift in Sources */,
+				2017375724458D1E006F1C54 /* SortingAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

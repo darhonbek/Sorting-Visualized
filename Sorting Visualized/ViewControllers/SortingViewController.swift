@@ -9,29 +9,33 @@
 import UIKit
 
 private extension CGFloat {
-    static let width: CGFloat = 2.0
+    static let width: CGFloat = 8.0
     static let spacing: CGFloat = 2.0
     static let horizontalPadding: CGFloat = 24.0
     static let verticalPadding: CGFloat = 24.0
 }
 
 private extension String {
-    static let animate = "Animate"
+    static let sort = "Sort"
 }
 
 class SortingViewController: UIViewController {
-    private lazy var animateButton: UIButton = {
+    var viewModel: SortingViewModelProtocol
+
+    private var bars: [BarView]?
+
+    private lazy var sortButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(.animate, for: .normal)
-        button.addTarget(self, action: #selector(touchUpInside(animateButton:)), for: .touchUpInside)
+        button.setTitle(.sort, for: .normal)
+        button.addTarget(self, action: #selector(touchUpInside(sortButton:)), for: .touchUpInside)
 
         button.backgroundColor = .red
 
         return button
     }()
 
-    private lazy var barStackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -43,6 +47,20 @@ class SortingViewController: UIViewController {
         return stackView
     }()
 
+    // MARK: - Init
+
+    init(viewModel: SortingViewModelProtocol) {
+        self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -52,59 +70,107 @@ class SortingViewController: UIViewController {
         super.viewWillAppear(animated)
         populateBars()
     }
+}
 
+// MARK: - Layout
+
+extension SortingViewController {
     private func setupLayout() {
         view.backgroundColor = .yellow
-        view.addSubview(animateButton)
-        view.addSubview(barStackView)
+        view.addSubview(sortButton)
+        view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            barStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: .verticalPadding),
-            barStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .horizontalPadding),
-            barStackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -.horizontalPadding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: .verticalPadding),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .horizontalPadding),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -.horizontalPadding),
 
-            animateButton.topAnchor.constraint(equalTo: barStackView.bottomAnchor, constant: .verticalPadding),
-            animateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .horizontalPadding),
-            animateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.horizontalPadding),
-            animateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -.verticalPadding)
+            sortButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: .verticalPadding),
+            sortButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .horizontalPadding),
+            sortButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.horizontalPadding),
+            sortButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -.verticalPadding)
         ])
     }
 
     private func populateBars() {
         var randomNumbers: [CGFloat] = []
-        for _ in 0 ..< 10 {
-            let range: ClosedRange<CGFloat> = CGFloat(10) ... CGFloat(300)
-            randomNumbers.append(CGFloat.random(in: range))
+        for i in 0 ..< viewModel.array.count {
+            randomNumbers.append(CGFloat(viewModel.array[i]))
         }
-
-//        let n = CGFloat(randomNumbers.count)
-//        let width = (barStackView.bounds.width) / (n*2)
 
         randomNumbers.forEach {
             let barView = BarView(width: .width, height: $0)
             barView.translatesAutoresizingMaskIntoConstraints = false
-            barStackView.addArrangedSubview(barView)
+            stackView.addArrangedSubview(barView)
+        }
+    }
+}
+
+// MARK: - Sorting Actions
+
+extension SortingViewController {
+    @objc func touchUpInside(sortButton: UIButton) {
+        viewModel.sort()
+        bars = stackView.subviews.compactMap { $0 as? BarView }
+
+        guard let actions = viewModel.actions else { return }
+
+        perform(actions: actions)
+    }
+
+    private func perform(actions: [SortingAction], index: Int = 0) {
+        perform(action: actions[index]) { [weak self] in
+            if index + 1 < actions.count {
+                self?.perform(actions: actions, index: index + 1)
+            }
         }
     }
 
-    @objc func touchUpInside(animateButton: UIButton) {
-        let semaphore = DispatchSemaphore(value: 0)
-        let subviews = barStackView.arrangedSubviews
-        let firstView = subviews[0]
+    private func perform(action: SortingAction, completion: @escaping () -> Void) {
+        let animation: () -> Void
+        let innerCompletion: () -> Void
 
-        for index in 1 ..< subviews.count {
-            let secondView = subviews[subviews.count - 1 - index]
+        switch action {
+        case .swap(let i, let j):
+            animation = { [weak self] in
+                guard let self = self, var bars = self.bars else { return }
 
-            UIView.animate(withDuration: 0.5, animations: {
-                semaphore.signal()
+                let tempX = bars[i].frame.origin.x
+                bars[i].frame.origin.x = bars[j].frame.origin.x
+                bars[j].frame.origin.x = tempX
 
-                let xOriginFirst = firstView.frame.origin.x
-                firstView.frame.origin.x = secondView.frame.origin.x
-                secondView.frame.origin.x = xOriginFirst
-            }) { _ in
+                let tempBar = bars[i]
+                bars[i] = bars[j]
+                bars[j] = tempBar
+
+                self.bars = bars
             }
+            innerCompletion = {}
+        case .compare(let i, let j):
+            animation = { [weak self] in
+                guard let self = self, let bars = self.bars else { return }
 
-            semaphore.wait(timeout: .now() + .seconds(2))
+                bars[i].backgroundColor = .red
+                bars[j].backgroundColor = .red
+            }
+            innerCompletion = { [weak self] in
+                guard let self = self, let bars = self.bars else { return }
+
+                bars[i].backgroundColor = .blue
+                bars[j].backgroundColor = .blue
+            }
+        case .move:
+            // TODO: - Update
+            animation = {}
+            innerCompletion = {}
+            break
+        }
+
+        UIView.animate(withDuration: 0.2, animations: {
+            animation()
+        }) { _ in
+            innerCompletion()
+            completion()
         }
     }
 }

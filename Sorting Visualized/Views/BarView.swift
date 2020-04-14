@@ -8,17 +8,15 @@
 
 import UIKit
 
-private extension CGFloat {
-    static let width: CGFloat = 16.0
-}
-
 class BarView: UIView {
-    let value: CGFloat
+    private let height: CGFloat
+    private let width: CGFloat
 
     // MARK: - Init
 
-    init(value: CGFloat) {
-        self.value = value
+    init(width: CGFloat, height: CGFloat) {
+        self.height = height
+        self.width = width
 
         super.init(frame: .zero)
 
@@ -30,6 +28,6 @@ class BarView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: .width, height: value)
+        return CGSize(width: width, height: height)
     }
 }

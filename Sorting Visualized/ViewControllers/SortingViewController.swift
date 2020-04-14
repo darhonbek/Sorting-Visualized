@@ -9,7 +9,8 @@
 import UIKit
 
 private extension CGFloat {
-    static let spacing: CGFloat = 8.0
+    static let width: CGFloat = 2.0
+    static let spacing: CGFloat = 2.0
     static let horizontalPadding: CGFloat = 24.0
     static let verticalPadding: CGFloat = 24.0
 }
@@ -45,6 +46,10 @@ class SortingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         populateBars()
     }
 
@@ -66,8 +71,17 @@ class SortingViewController: UIViewController {
     }
 
     private func populateBars() {
-        [CGFloat(128), 512, 256, 64].forEach {
-            let barView = BarView(value: $0)
+        var randomNumbers: [CGFloat] = []
+        for _ in 0 ..< 10 {
+            let range: ClosedRange<CGFloat> = CGFloat(10) ... CGFloat(300)
+            randomNumbers.append(CGFloat.random(in: range))
+        }
+
+//        let n = CGFloat(randomNumbers.count)
+//        let width = (barStackView.bounds.width) / (n*2)
+
+        randomNumbers.forEach {
+            let barView = BarView(width: .width, height: $0)
             barView.translatesAutoresizingMaskIntoConstraints = false
             barStackView.addArrangedSubview(barView)
         }

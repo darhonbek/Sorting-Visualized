@@ -65,7 +65,7 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		20B1F9B72441D38A0061EC19 /* Model_TO_BE_RENAMED */ = {
+		20B1F9B72441D38A0061EC19 /* SortingServices */ = {
 			isa = PBXGroup;
 			children = (
 				2017375624458D1E006F1C54 /* SortingAction.swift */,
@@ -74,7 +74,7 @@
 				2017375424458080006F1C54 /* BubbleSortVisualizer.swift */,
 				20B1F9B82441D39B0061EC19 /* MergeSortVisualizer.swift */,
 			);
-			path = Model_TO_BE_RENAMED;
+			path = SortingServices;
 			sourceTree = "<group>";
 		};
 		20CE6015243EEA2300CE90F1 = {
@@ -98,7 +98,7 @@
 			children = (
 				20CE6021243EEA2300CE90F1 /* AppDelegate.swift */,
 				20CE6023243EEA2300CE90F1 /* SceneDelegate.swift */,
-				20B1F9B72441D38A0061EC19 /* Model_TO_BE_RENAMED */,
+				20B1F9B72441D38A0061EC19 /* SortingServices */,
 				2029EECC24458F8400F4F91D /* ViewModels */,
 				20CE6036243EEA7C00CE90F1 /* ViewControllers */,
 				207465DE24400E6400D54085 /* Views */,

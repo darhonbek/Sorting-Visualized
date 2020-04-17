@@ -20,12 +20,12 @@ class BubbleSortVisualizer: SortingVisualizingProtocol {
     static func sort<T: Comparable>(_ array: [T]) -> [T] {
         var array = array
 
-        for i in 0 ..< array.count {
-            for j in i ..< array.count {
+        for i in 0 ..< array.count - 1 {
+            for j in 0 ..< array.count - 1 - i {
                 actions.append(.compare(i, j))
-                if array[i] > array[j] {
-                    actions.append(.swap(i, j))
-                    swap(&array, i, j)
+                if array[j] > array[j + 1] {
+                    actions.append(.swap(j, j + 1))
+                    swap(&array, j, j + 1)
                 }
             }
         }

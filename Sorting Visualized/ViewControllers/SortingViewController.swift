@@ -11,11 +11,13 @@ import UIKit
 private extension CGFloat {
     static let width: CGFloat = 8.0
     static let spacing: CGFloat = 2.0
+    static let smallHorizontalPadding: CGFloat = 16.0
     static let horizontalPadding: CGFloat = 24.0
     static let verticalPadding: CGFloat = 24.0
 }
 
 private extension String {
+    static let reset = "Reset"
     static let sort = "Sort"
 }
 
@@ -23,6 +25,17 @@ class SortingViewController: UIViewController {
     var viewModel: SortingViewModelProtocol
 
     private var bars: [BarView]?
+
+    private lazy var resetButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(.reset, for: .normal)
+        button.addTarget(self, action: #selector(touchUpInside(resetButton:)), for: .touchUpInside)
+
+        button.backgroundColor = .red
+
+        return button
+    }()
 
     private lazy var sortButton: UIButton = {
         let button = UIButton()
@@ -68,7 +81,7 @@ class SortingViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        populateBars()
+        resetAndPopulateBars()
     }
 }
 
@@ -77,22 +90,30 @@ class SortingViewController: UIViewController {
 extension SortingViewController {
     private func setupLayout() {
         view.backgroundColor = .yellow
-        view.addSubview(sortButton)
         view.addSubview(stackView)
+        view.addSubview(resetButton)
+        view.addSubview(sortButton)
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: .verticalPadding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .horizontalPadding),
             stackView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -.horizontalPadding),
 
-            sortButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: .verticalPadding),
-            sortButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .horizontalPadding),
+            resetButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .smallHorizontalPadding),
+            resetButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: .verticalPadding),
+            resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -.verticalPadding),
+            resetButton.widthAnchor.constraint(equalTo: sortButton.widthAnchor),
+
+            sortButton.leadingAnchor.constraint(equalTo: resetButton.trailingAnchor, constant: .smallHorizontalPadding),
             sortButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.horizontalPadding),
+            sortButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: .verticalPadding),
             sortButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -.verticalPadding)
         ])
     }
 
-    private func populateBars() {
+    private func resetAndPopulateBars() {
+        stackView.subviews.forEach { $0.removeFromSuperview() }
+
         var randomNumbers: [CGFloat] = []
         for i in 0 ..< viewModel.array.count {
             randomNumbers.append(CGFloat(viewModel.array[i]))
@@ -106,6 +127,7 @@ extension SortingViewController {
     }
 }
 
+// TODO: - Move to separate sorting animations class/enum.
 // MARK: - Sorting Actions
 
 extension SortingViewController {
@@ -116,6 +138,11 @@ extension SortingViewController {
         guard let actions = viewModel.actions else { return }
 
         perform(actions: actions)
+    }
+
+    @objc func touchUpInside(resetButton: UIButton) {
+        viewModel.reset()
+        resetAndPopulateBars()
     }
 
     private func perform(actions: [SortingAction], index: Int = 0) {
@@ -135,6 +162,9 @@ extension SortingViewController {
             animation = { [weak self] in
                 guard let self = self, var bars = self.bars else { return }
 
+                bars[i].backgroundColor = .green
+                bars[j].backgroundColor = .green
+
                 let tempX = bars[i].frame.origin.x
                 bars[i].frame.origin.x = bars[j].frame.origin.x
                 bars[j].frame.origin.x = tempX
@@ -145,7 +175,12 @@ extension SortingViewController {
 
                 self.bars = bars
             }
-            innerCompletion = {}
+            innerCompletion = { [weak self] in
+                guard let self = self, let bars = self.bars else { return }
+
+                bars[i].backgroundColor = .blue
+                bars[j].backgroundColor = .blue
+            }
         case .compare(let i, let j):
             animation = { [weak self] in
                 guard let self = self, let bars = self.bars else { return }
@@ -166,7 +201,7 @@ extension SortingViewController {
             break
         }
 
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.01, animations: {
             animation()
         }) { _ in
             innerCompletion()

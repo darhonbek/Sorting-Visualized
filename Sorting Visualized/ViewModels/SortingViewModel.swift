@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SortingViewModelProtocol {
-//    associatedtype T
+    //    associatedtype T
     var sortingAlgorithm: SortingAlgorithm { get set }
 
     var array: [Int] { get set }
@@ -17,6 +17,8 @@ protocol SortingViewModelProtocol {
     var actions: [SortingAction]? { get set }
 
     func sort()
+
+    func reset()
 }
 
 extension SortingViewModelProtocol {
@@ -39,12 +41,16 @@ class SortingViewModel: SortingViewModelProtocol {
     }
 
     func sort() {
-       actions = sortingVisualizer.getSortingActions(array)
+        actions = sortingVisualizer.getSortingActions(array)
+    }
+
+    func reset() {
+        array = generateRandomArray()
     }
 
     private func generateRandomArray() -> [Int] {
         var array: [Int] = []
-        for _ in 0 ..< 10 {
+        for _ in 0 ..< 20 {
             array.append(Int.random(in: 10...300))
         }
         return array
